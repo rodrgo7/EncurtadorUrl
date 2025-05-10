@@ -23,7 +23,7 @@ public class MapeamentoUrl {
         this.contadorAcessos = 0L;
     }
 
-    public MapeamentoUrl(CodigoCurto codigoCurto, UrlOriginal urlOriginal, LocalDateTime dataCriacao) {
+    public MapeamentoUrl(CodigoCurto codigoCurto, UrlOriginal urlOriginal, LocalDateTime dataCriacao, LocalDateTime dataExpiracao) {
         Assert.notNull(codigoCurto, "O codigo curto não pode ser nulo");
         Assert.notNull(urlOriginal, "O URL original não pode ser nulo");
 
@@ -32,6 +32,9 @@ public class MapeamentoUrl {
         this.dataCriacao = LocalDateTime.now();
         this.dataExpiracao = dataExpiracao;
         this.contadorAcessos = 0L;
+    }
+
+    public MapeamentoUrl(CodigoCurto novoCodCurto, UrlOriginal urlOriginal, LocalDateTime dataExpiracao) {
     }
 
     // --- Getters ---
