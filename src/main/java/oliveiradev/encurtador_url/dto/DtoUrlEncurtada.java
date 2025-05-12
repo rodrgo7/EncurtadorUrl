@@ -2,6 +2,10 @@ package oliveiradev.encurtador_url.dto;
 
 import java.time.LocalDateTime;
 
+/**
+ * Data Transfer Object (DTO) for shortened URL information.
+ * This is the single source of truth for URL shortening data transfer.
+ */
 public class DtoUrlEncurtada {
 
     private final String urlOriginal;

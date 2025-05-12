@@ -3,8 +3,8 @@ package oliveiradev.encurtador_url.application.service;
 import oliveiradev.encurtador_url.domain.model.CodigoCurto;
 import oliveiradev.encurtador_url.domain.model.MapeamentoUrl;
 import oliveiradev.encurtador_url.domain.model.UrlOriginal;
-import oliveiradev.encurtador_url.interfaces.dto.ComandoEncurtadorUrl;
-import oliveiradev.encurtador_url.interfaces.dto.DtoUrlEncurtada;
+import oliveiradev.encurtador_url.dto.ComandoEncurtadorUrl;
+import oliveiradev.encurtador_url.dto.DtoUrlEncurtada;
 import oliveiradev.encurtador_url.domain.service.EncurtamentoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +18,10 @@ import org.springframework.validation.annotation.Validated;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+/**
+ * Application service for URL shortening operations.
+ * This is the single source of truth for application layer logic.
+ */
 @Service
 @Validated
 public class AplicacaoEncurtadorService {
@@ -47,7 +51,7 @@ public class AplicacaoEncurtadorService {
             dataExpiracao = LocalDateTime.now().plusMinutes(comando.getTtlEmMinutos());
             log.debug("Data de expiração calculada: {}", dataExpiracao);
         } else {
-            log.debug("Nenhum TTL fornecido ou TTL inválido, URL não expirará (ou usará padrão do domínio, se houver).");
+            log.debug("Nenhum TTL fornecido ou TTL inválido, URL não expirará.");
         }
 
         MapeamentoUrl mapeamentoPersistido = encurtamentoService.encurtar(urlOriginalObj, dataExpiracao);
@@ -75,7 +79,7 @@ public class AplicacaoEncurtadorService {
         return encurtamentoService.buscaCodigoCurto(codigoCurtoObj)
                 .filter(mapeamento -> {
                     if (mapeamento.isExpirado(agora)) {
-                        log.warn("Mapeamento para código '{}' encontrado, mas está expirado (expirou em {}). Não será retornado.",
+                        log.warn("Mapeamento para código '{}' encontrado, mas está expirado (expirou em {}).",
                                 valorCodigoCurto, mapeamento.getDataExpiracao());
                         return false;
                     }

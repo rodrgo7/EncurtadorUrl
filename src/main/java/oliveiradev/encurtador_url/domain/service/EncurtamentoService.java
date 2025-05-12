@@ -7,11 +7,17 @@ import oliveiradev.encurtador_url.domain.repository.MapeamentoUrlRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Domain service for URL shortening operations.
+ * Handles the core business logic for URL shortening.
+ */
+@Service
 public class EncurtamentoService {
     private static final Logger log = LoggerFactory.getLogger(EncurtamentoService.class);
     // Número máximo de tentativas para gerar um código curto

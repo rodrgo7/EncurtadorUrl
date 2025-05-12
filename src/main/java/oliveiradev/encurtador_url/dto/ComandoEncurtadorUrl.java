@@ -4,6 +4,10 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
 
+/**
+ * Command DTO for URL shortening requests.
+ * This is the single source of truth for URL shortening commands.
+ */
 public class ComandoEncurtadorUrl {
     @NotBlank(message = "A URL original não pode ser nula ou vazia.")
     @URL(message = "O formato da URL original é inválido.")

@@ -1,0 +1,11 @@
+server:
+    port: 8080
+spring:
+    data:
+        mongodb:
+            uri: mongodb://localhost:27017/url_shortener_ddd_db
+app:
+    baseUrl: http://localhost:8080
+logging:
+    level:
+        com.example.urlencurtada: DEBUG

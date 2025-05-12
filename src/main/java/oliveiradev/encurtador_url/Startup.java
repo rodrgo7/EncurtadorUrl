@@ -9,7 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
     "oliveiradev.encurtador_url.application",
     "oliveiradev.encurtador_url.domain",
     "oliveiradev.encurtador_url.infrastructure",
-    "oliveiradev.encurtador_url.interfaces"
+    "oliveiradev.encurtador_url.interfaces",
+    "oliveiradev.encurtador_url.infra"
 })
 public class Startup {
 
