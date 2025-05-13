@@ -3,7 +3,7 @@ server:
 spring:
     data:
         mongodb:
-            uri: mongodb://localhost:27017/url_shortener_ddd_db
+            uri: mongodb://localhost:27017/urlEncurtadadb
 app:
     baseUrl: http://localhost:8080
 logging:

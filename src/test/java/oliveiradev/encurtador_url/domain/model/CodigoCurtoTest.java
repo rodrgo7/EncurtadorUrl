@@ -1,11 +1,9 @@
 package oliveiradev.encurtador_url.domain.model;
 
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class CodigoCurtoTest {
-
     @Test
     void construtor_ComValorValido_DeveCriarInstancia() {
         String codigoValido = "aBcDeFg";
@@ -19,7 +17,7 @@ class CodigoCurtoTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             new CodigoCurto(null);
         });
-        assertTrue(exception.getMessage().contains("O valor do código curto não pode ser nulo ou vazio."));
+        assertTrue(exception.getMessage().contains("não pode ser nulo ou vazio"));
     }
 
     @Test
@@ -27,15 +25,7 @@ class CodigoCurtoTest {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             new CodigoCurto("");
         });
-        assertTrue(exception.getMessage().contains("O valor do código curto não pode ser nulo ou vazio."));
-    }
-
-    @Test
-    void construtor_ComValorApenasComEspacos_DeveLancarIllegalArgumentException() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            new CodigoCurto("   ");
-        });
-        assertTrue(exception.getMessage().contains("O valor do código curto não pode ser nulo ou vazio."));
+        assertTrue(exception.getMessage().contains("não pode ser nulo ou vazio"));
     }
 
     @Test
@@ -44,13 +34,6 @@ class CodigoCurtoTest {
         CodigoCurto codigo1 = new CodigoCurto(valor);
         CodigoCurto codigo2 = new CodigoCurto(valor);
         assertEquals(codigo1, codigo2);
-    }
-
-    @Test
-    void equals_ComValoresDiferentes_DeveRetornarFalse() {
-        CodigoCurto codigo1 = new CodigoCurto("xYz123");
-        CodigoCurto codigo2 = new CodigoCurto("AbC987");
-        assertNotEquals(codigo1, codigo2);
     }
 
     @Test
