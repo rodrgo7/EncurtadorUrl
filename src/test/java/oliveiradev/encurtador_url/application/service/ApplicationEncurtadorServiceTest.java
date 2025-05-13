@@ -4,8 +4,8 @@ import oliveiradev.encurtador_url.domain.model.CodigoCurto;
 import oliveiradev.encurtador_url.domain.model.MapeamentoUrl;
 import oliveiradev.encurtador_url.domain.model.UrlOriginal;
 import oliveiradev.encurtador_url.domain.service.EncurtamentoService;
-import oliveiradev.encurtador_url.interfaces.dto.DtoUrlEncurtada;
-import oliveiradev.encurtador_url.interfaces.dto.ComandoEncurtadorUrl;
+import oliveiradev.encurtador_url.application.dto.DtoUrlEncurtada;
+import oliveiradev.encurtador_url.application.dto.ComandoEncurtadorUrl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -55,7 +55,6 @@ public class ApplicationEncurtadorServiceTest {
     }
 
     // --- Testes para o método encurtarUrl ---
-
     @Test
     void encurtarUrl_ComComandoValidoETTL_DeveChamarDominioComDataCalculadaERetornarDto() {
         String urlOriginalStr = "https://valida.com/com/ttl";

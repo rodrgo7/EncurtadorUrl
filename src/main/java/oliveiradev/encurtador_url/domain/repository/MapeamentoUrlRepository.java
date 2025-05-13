@@ -8,8 +8,7 @@ import java.util.Optional;
 
 public interface MapeamentoUrlRepository {
     MapeamentoUrl salvar(MapeamentoUrl mapeamentoUrl);
-    Optional<MapeamentoUrl> buscaCodigoCurto(CodigoCurto codigoCurto);
-
+    Optional<MapeamentoUrl> buscarPorCodigoCurto(CodigoCurto codigoCurto);
     boolean existeCodigoCurto(CodigoCurto codigoCurto);
-    Optional<MapeamentoUrl> buscaurlOriginal(UrlOriginal urlOriginal);
+    Optional<MapeamentoUrl> buscarPorUrlOriginal(UrlOriginal urlOriginal);
 }

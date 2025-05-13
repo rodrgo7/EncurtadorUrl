@@ -10,20 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Map;
 import java.util.Optional;
 
-/**
- * Domain service for URL shortening operations.
- * Handles the core business logic for URL shortening.
- */
 @Service
-public class EncurtamentoService {
+public class EncurtamentoService { // Serviço de Domínio
     private static final Logger log = LoggerFactory.getLogger(EncurtamentoService.class);
-    // Número máximo de tentativas para gerar um código curto
     private static final int MAX_TENTATIVAS_GERACAO_CODIGO = 5;
+
     private final MapeamentoUrlRepository mapeamentoUrlRepository;
-    private final CodigoCurtoService codigoCurtoService;
+    private final CodigoCurtoService codigoCurtoService; // Estratégia de geração
 
     @Autowired
     public EncurtamentoService(MapeamentoUrlRepository mapeamentoUrlRepository, CodigoCurtoService codigoCurtoService) {
@@ -40,6 +35,7 @@ public class EncurtamentoService {
             log.trace("Tentativa {}: Código curto gerado '{}'", tentativas + 1, novoCodCurto.getValor());
 
             if (!mapeamentoUrlRepository.existeCodigoCurto(novoCodCurto)) {
+                // Usa o construtor corrigido de MapeamentoUrl
                 MapeamentoUrl novoMapeamento = new MapeamentoUrl(novoCodCurto, urlOriginal, dataExpiracao);
                 MapeamentoUrl mapeamentoSalvo = mapeamentoUrlRepository.salvar(novoMapeamento);
                 log.info("URL '{}' encurtada com sucesso para '{}'. Expiração: {}",
@@ -52,23 +48,20 @@ public class EncurtamentoService {
         }
 
         String mensagemErro = String.format(
-                "Não foi possivel gerar um código curto único para a URL '%s' após %d tentativas.",
+                "Não foi possível gerar um código curto único para a URL '%s' após %d tentativas.",
                 urlOriginal.getValor(), MAX_TENTATIVAS_GERACAO_CODIGO
         );
         log.error(mensagemErro);
-
         throw new IllegalStateException(mensagemErro);
     }
 
-    public Optional<MapeamentoUrl> buscaCodigoCurto(CodigoCurto codigoCurto) {
-        log.debug("Bucando mapeamento para o código curto: {}", codigoCurto.getValor());
-
-        return mapeamentoUrlRepository.buscaCodigoCurto(codigoCurto);
+    public Optional<MapeamentoUrl> buscarPorCodigoCurto(CodigoCurto codigoCurto) { // Nome corrigido
+        log.debug("Buscando mapeamento para o código curto: {}", codigoCurto.getValor());
+        return mapeamentoUrlRepository.buscarPorCodigoCurto(codigoCurto); // Usa método com nome corrigido
     }
 
     public MapeamentoUrl salvar(MapeamentoUrl mapeamentoUrl) {
         log.debug("Salvando mapeamento com ID: {} e Código Curto: {}", mapeamentoUrl.getId(), mapeamentoUrl.getCodigoCurto().getValor());
-
         return mapeamentoUrlRepository.salvar(mapeamentoUrl);
     }
 }

@@ -2,7 +2,7 @@ package oliveiradev.encurtador_url.interfaces.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import oliveiradev.encurtador_url.domain.service.AplicacaoEncurtadorService;
-import oliveiradev.encurtador_url.dto.DtoUrlEncurtada;
+import oliveiradev.encurtador_url.application.dto.DtoUrlEncurtada;
 import oliveiradev.encurtador_url.interfaces.rest.dto.EncurtarUrlHttpRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

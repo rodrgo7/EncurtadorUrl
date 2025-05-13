@@ -7,7 +7,7 @@ public final class UrlOriginal {
     private final String valor;
 
     public UrlOriginal(String valor) {
-        Assert.hasText(valor, "o valor da URL original não pode ser nulo ou vazio");
+        Assert.hasText(valor, "O valor da URL original não pode ser nulo ou vazio.");
         this.valor = valor;
     }
 
@@ -20,7 +20,6 @@ public final class UrlOriginal {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UrlOriginal that = (UrlOriginal) o;
-
         return Objects.equals(valor, that.valor);
     }
 
@@ -30,7 +29,7 @@ public final class UrlOriginal {
     }
 
     @Override
-    public  String toString() {
+    public String toString() {
         return valor;
     }
 }

@@ -3,8 +3,8 @@ package oliveiradev.encurtador_url.application.service;
 import oliveiradev.encurtador_url.domain.model.CodigoCurto;
 import oliveiradev.encurtador_url.domain.model.MapeamentoUrl;
 import oliveiradev.encurtador_url.domain.model.UrlOriginal;
-import oliveiradev.encurtador_url.dto.ComandoEncurtadorUrl;
-import oliveiradev.encurtador_url.dto.DtoUrlEncurtada;
+import oliveiradev.encurtador_url.application.dto.ComandoEncurtadorUrl; // DTO da raiz
+import oliveiradev.encurtador_url.application.dto.DtoUrlEncurtada;   // DTO da raiz
 import oliveiradev.encurtador_url.domain.service.EncurtamentoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,16 +18,12 @@ import org.springframework.validation.annotation.Validated;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-/**
- * Application service for URL shortening operations.
- * This is the single source of truth for application layer logic.
- */
 @Service
 @Validated
 public class AplicacaoEncurtadorService {
     private static final Logger log = LoggerFactory.getLogger(AplicacaoEncurtadorService.class);
 
-    private final EncurtamentoService encurtamentoService;
+    private final EncurtamentoService encurtamentoService; // Serviço de Domínio
     private final String baseUrlAplicacao;
 
     @Autowired
@@ -76,7 +72,7 @@ public class AplicacaoEncurtadorService {
         CodigoCurto codigoCurtoObj = new CodigoCurto(valorCodigoCurto);
         LocalDateTime agora = LocalDateTime.now();
 
-        return encurtamentoService.buscaCodigoCurto(codigoCurtoObj)
+        return encurtamentoService.buscarPorCodigoCurto(codigoCurtoObj) // Usa método com nome corrigido
                 .filter(mapeamento -> {
                     if (mapeamento.isExpirado(agora)) {
                         log.warn("Mapeamento para código '{}' encontrado, mas está expirado (expirou em {}).",
@@ -104,7 +100,7 @@ public class AplicacaoEncurtadorService {
         CodigoCurto codigoCurtoObj = new CodigoCurto(valorCodigoCurto);
         LocalDateTime agora = LocalDateTime.now();
 
-        Optional<MapeamentoUrl> mapeamentoOpt = encurtamentoService.buscaCodigoCurto(codigoCurtoObj);
+        Optional<MapeamentoUrl> mapeamentoOpt = encurtamentoService.buscarPorCodigoCurto(codigoCurtoObj); // Usa método com nome corrigido
 
         if (mapeamentoOpt.isEmpty()) {
             log.warn("Código curto '{}' não encontrado para redirecionamento.", valorCodigoCurto);
@@ -124,7 +120,6 @@ public class AplicacaoEncurtadorService {
 
         log.info("Acesso registrado para código '{}'. Redirecionando para URL: '{}'",
                 valorCodigoCurto, mapeamento.getUrlOriginal().getValor());
-
         return Optional.of(mapeamento.getUrlOriginal().getValor());
     }
-} 
+}

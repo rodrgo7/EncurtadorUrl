@@ -23,7 +23,7 @@ public class ManipuladorExcecoesGlobais {
                 .collect(Collectors.toMap(
                         FieldError::getField,
                         FieldError::getDefaultMessage,
-                        (mensagemExistente, novaMensagem) -> mensagemExistente + "; " + novaMensagem // Em caso de múltiplos erros no mesmo campo
+                        (mensagemExistente, novaMensagem) -> mensagemExistente + "; " + novaMensagem
                 ));
         log.warn("Erro de validação nos argumentos do método: {}", erros, ex);
         return ResponseEntity.badRequest().body(erros);
@@ -34,19 +34,14 @@ public class ManipuladorExcecoesGlobais {
         Map<String, String> corpoResposta = new HashMap<>();
         corpoResposta.put("erro", ex.getMessage());
         log.warn("Recurso não encontrado: {}", ex.getMessage());
-
         return new ResponseEntity<>(corpoResposta, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(IllegalStateException.class)
     public ResponseEntity<Map<String, String>> handleIllegalState(IllegalStateException ex) {
         Map<String, String> corpoResposta = new HashMap<>();
-        // Evite expor detalhes internos da exceção diretamente ao cliente em produção.
         corpoResposta.put("erro", "Não foi possível processar a requisição devido a um estado inesperado ou conflito de recursos.");
-        // Para depuração, podemos logar a mensagem completa.
         log.error("Exceção de estado ilegal processando requisição: {}", ex.getMessage(), ex);
-        // HttpStatus.CONFLICT (409) pode ser apropriado se for uma falha de regra de negócio previsível.
-        // HttpStatus.INTERNAL_SERVER_ERROR (500) para falhas mais genéricas de estado.
         return new ResponseEntity<>(corpoResposta, HttpStatus.CONFLICT);
     }
 
@@ -55,7 +50,6 @@ public class ManipuladorExcecoesGlobais {
         Map<String, String> corpoResposta = new HashMap<>();
         corpoResposta.put("erro", "Ocorreu um erro inesperado no servidor. Por favor, tente novamente mais tarde.");
         log.error("Erro genérico não tratado capturado: {}", ex.getMessage(), ex);
-
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(corpoResposta);
     }
 }

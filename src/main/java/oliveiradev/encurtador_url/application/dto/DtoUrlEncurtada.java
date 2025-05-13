@@ -1,13 +1,8 @@
-package oliveiradev.encurtador_url.dto;
+package oliveiradev.encurtador_url.application.dto;
 
 import java.time.LocalDateTime;
 
-/**
- * Data Transfer Object (DTO) for shortened URL information.
- * This is the single source of truth for URL shortening data transfer.
- */
 public class DtoUrlEncurtada {
-
     private final String urlOriginal;
     private final String codigoCurto;
     private final String urlEncurtadaCompleta;
@@ -25,27 +20,12 @@ public class DtoUrlEncurtada {
         this.dataExpiracao = dataExpiracao;
     }
 
-    public String getUrlOriginal() {
-        return urlOriginal;
-    }
-
-    public String getCodigoCurto() {
-        return codigoCurto;
-    }
-
-    public String getUrlEncurtadaCompleta() {
-        return urlEncurtadaCompleta;
-    }
-
-    public long getAcessos() {
-        return acessos;
-    }
-
-    public LocalDateTime getDataCriacao() {
-        return dataCriacao;
-    }
-
-    public LocalDateTime getDataExpiracao() {
-        return dataExpiracao;
+    // Getters
+        public String getUrlOriginal() { return urlOriginal; }
+        public String getCodigoCurto() { return codigoCurto; }
+        public String getUrlEncurtadaCompleta() { return urlEncurtadaCompleta; }
+        public long getAcessos() { return acessos; }
+        public LocalDateTime getDataCriacao() { return dataCriacao; }
+        public LocalDateTime getDataExpiracao() { return dataExpiracao;
     }
 }
